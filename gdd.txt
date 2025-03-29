@@ -1,4 +1,14 @@
+Idea 1: Forest Run. A red hooded protagonist must make his way through a perilous forest filled with angry plant monsters.
 Assets To Be Used
 - background image: https://aethrall.itch.io/demon-woods-parallax-background
 - player image: https://penzilla.itch.io/hooded-protagonist
 - enemy image: https://monopixelart.itch.io/forest-monsters-pixel-art
+- key image: https://drxwat.itch.io/pixel-art-key
+- hearts : https://snoblin.itch.io/pixel-hearts
+
+extra
+- https://oco.itch.io/medieval-fantasy-character-pack
+- https://toffeecraft.itch.io/cat-pixel-mega-pack
+- https://edermunizz.itch.io/free-pixel-art-forest
+- https://assetstore.unity.com/packages/2d/environments/free-2d-cartoon-parallax-background-205812
+- https://craftpix.net/freebies/free-2d-top-down-pixel-dungeon-asset-pack/
