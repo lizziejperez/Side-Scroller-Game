@@ -1,0 +1,4 @@
+Assets To Be Used
+- background image: https://aethrall.itch.io/demon-woods-parallax-background
+- player image: https://penzilla.itch.io/hooded-protagonist
+- enemy image: https://monopixelart.itch.io/forest-monsters-pixel-art
