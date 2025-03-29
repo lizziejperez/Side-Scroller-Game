@@ -1,5 +1,5 @@
 <h1>Side Scroller Game</h1>
-(3/29 - present)
+(3/29/2025 - present)
 
 This is my first attempt at making a side scroller game with javascript. 
 
