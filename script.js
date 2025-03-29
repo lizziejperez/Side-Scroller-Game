@@ -11,27 +11,21 @@ window.addEventListener('load', function() {
             this.keys = [];
 
             // check for when key is pressed down
-            window.addEventListener('keydown', function(e) {
-                // get key pressed from event
-                var keyPressed = e.key;
-                
+            window.addEventListener('keydown', event => {
                 // if key that is pressed is valid and is NOT present in keys pressed list
-                if ((keyPressed === 'ArrowDown' || keyPressed === 'ArrowUp' || keyPressed === 'ArrowLeft' || keyPressed === 'ArrowRight') && this.keys.indexOf(keyPressed) === -1) {
+                if ((event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') && this.keys.indexOf(event.key) === -1) {
                     // add key pressed to keys pressed list
-                    this.keys.push(keyPressed);
+                    this.keys.push(event.key);
                 }
-                console.log(keyPressed, this.keys);
+                console.log(event.key, this.keys);
             });
 
             // check for when key is lifted up
-            window.addEventListener('keyup', function(e) {
-                // get key lifted from event
-                var keyPressed = e.key;
-
-                if (keyPressed === 'ArrowDown' || keyPressed === 'ArrowUp' || keyPressed === 'ArrowLeft' || keyPressed === 'ArrowRight') {
-                    this.keys.splice(this.keys.indexOf(keyPressed), 1);
+            window.addEventListener('keyup', event => {
+                if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
+                    this.keys.splice(this.keys.indexOf(event.key), 1);
                 }
-                console.log(keyPressed, this.keys);
+                console.log(event.key, this.keys);
             });
         }
     }
@@ -40,14 +34,31 @@ window.addEventListener('load', function() {
         constructor(gameWidth, gameHeight) {
             this.gameWidth = gameWidth;
             this.gameHeight = gameHeight;
-            this.width = 200;
-            this.height = 200;
+            this.width = 32;
+            this.height = 32;
             this.x = 0;
-            this.y = this.gameHeight - this.height; // start player at bottom of screen
+            this.y = this.gameHeight - this.height; // start player at bottom of screen            
+            this.image = document.getElementById('playerImage'); // set player image
+            this.frameX = 0;
+            this.frameY = 0;
+            this.speed = 0;
         }
         draw(context) {
             context.fillStyle = 'white';
             context.fillRect(this.x, this.y, this.width, this.height);
+            context.drawImage(this.image, (this.frameX * this.width), (this.frameY * this.height), this.width, this.height, this.x, this.y, this.width, this.height);
+        }
+        update(input) {
+            // horizontal movement
+            this.x += this.speed;
+            if (input.keys.indexOf('ArrowRight') > -1) {
+                this.speed = 1;
+            } else if (input.keys.indexOf('ArrowLeft') > -1) {
+                this.speed = -1; 
+            } else {
+                this.speed = 0;
+            }
+            
         }
     }
 
@@ -62,5 +73,11 @@ window.addEventListener('load', function() {
     player.draw(ctx);
     
     // main animation loop
-    function animate() {}
+    function animate() {
+        ctx.clearRect(0,0,canvas.width, canvas.height);
+        player.draw(ctx);
+        player.update(input);
+        requestAnimationFrame(animate);
+    }
+    animate();
 });
