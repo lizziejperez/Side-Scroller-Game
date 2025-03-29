@@ -58,6 +58,10 @@ window.addEventListener('load', function() {
             } else {
                 this.speed = 0;
             }
+
+            // horizontal walls
+            if (this.x < 0 ) this.x = 0;
+            if (this.x > (this.gameWidth - this.width))  this.x = this.gameWidth - this.width;
             
         }
     }
