@@ -47,8 +47,10 @@ window.addEventListener('load', function() {
             this.gravity = 1; // or weight
         }
         draw(context) {
-            context.fillStyle = 'white';
-            context.fillRect(this.x, this.y, this.width, this.height);
+            // background rectangle
+            // context.fillStyle = 'white';
+            // context.fillRect(this.x, this.y, this.width, this.height);
+
             context.drawImage(this.image, (this.frameX * this.width), (this.frameY * this.height), this.width, this.height, this.x, this.y, this.width, this.height);
         }
         update(input) {
@@ -120,14 +122,30 @@ window.addEventListener('load', function() {
             this.x = this.gameWidth;
             this.y = this.gameHeight - this.height;
             this.frameX = 0;
-            this.frameY = 1;
+            this.frameY = 2; // use run animation frames
+            this.maxFrameX = 6;
+            this.fps = 20;
+            this.frameTimer = 0;
+            this.frameInterval = 1000/this.fps;
             this.speed = 2;
         }
         draw(context) {
             context.drawImage(this.image, (this.frameX * this.width), (this.frameY * this.height), this.width, this.height, this.x, this.y, this.width, this.height);
         }
-        update() {
+        update(deltaTime) {
             this.x -= this.speed;
+
+            if (this.frameTimer > this.frameInterval) {
+                if (this.frameX >= this.maxFrameX) {
+                    this.frameX = 0;
+                } else {
+                    this.frameX++;
+                }
+                this.frameTimer = 0;
+            } else {
+                this.frameTimer += deltaTime;
+            }
+            
         }
     }
 
@@ -142,7 +160,7 @@ window.addEventListener('load', function() {
         
         enemies.forEach(enemy => {
             enemy.draw(ctx);
-            enemy.update();
+            enemy.update(deltaTime);
         });
     }
 
