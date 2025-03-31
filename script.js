@@ -3,7 +3,7 @@ window.addEventListener('load', function() {
     // enter all game code here
     const canvas = this.document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
-    canvas.width = 400;
+    canvas.width = 500;
     canvas.height = 360;
 
     class InputHandler {
@@ -92,13 +92,23 @@ window.addEventListener('load', function() {
             this.image = document.getElementById('backgroundImage');
             this.x = 0;
             this.y = -110;
-            this.width = 529;
-            this.height = 272;
+            this.width = 1184;
+            this.height = 544;
+            this.speed = 3;
         }
         draw(context) {
-            context.drawImage(this.image, this.x, this.y);
+            context.drawImage(this.image, this.x, this.y, this.width, this.height);
+            // second background for seamless scrolling
+            context.drawImage(this.image, this.x + this.width - this.speed, this.y, this.width, this.height);
+        }
+        update() {
+            this.x -= this.speed;
+
+            // background scrolling
+            if (this.x < 0 - this.width) this.x = 0;
         }
     }
+
     class Enemy {}
 
     function handleEnemies() {}
@@ -112,6 +122,7 @@ window.addEventListener('load', function() {
     function animate() {
         ctx.clearRect(0,0,canvas.width, canvas.height);        
         background.draw(ctx);
+        // background.update();
         player.draw(ctx);
         player.update(input);
         requestAnimationFrame(animate);
