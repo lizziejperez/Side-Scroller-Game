@@ -149,6 +149,7 @@ window.addEventListener('load', function() {
             this.frameTimer = 0;
             this.frameInterval = 1000/this.fps;
             this.speed = 2;
+            this.markedForDeletion = false;
         }
         draw(context) {
             context.drawImage(this.image, (this.frameX * this.width), (this.frameY * this.height), this.width, this.height, this.x, this.y, this.width, this.height);
@@ -169,6 +170,10 @@ window.addEventListener('load', function() {
                 this.frameTimer += deltaTime;
             }
             
+            // if off screen, mark for deletion
+            if (this.x < 0 - this.width) {
+                this.markedForDeletion = true;
+            }
         }
     }
 
@@ -185,6 +190,8 @@ window.addEventListener('load', function() {
             enemy.draw(ctx);
             enemy.update(deltaTime);
         });
+
+        enemies = enemies.filter(enemy => !enemy.markedForDeletion);
     }
 
     function displayStatusText() {}
