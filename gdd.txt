@@ -2,7 +2,7 @@ Idea 1: Forest Run. A red hooded protagonist must make his way through a perilou
 Assets To Be Used
 - background image: https://aethrall.itch.io/demon-woods-parallax-background
 - player image: https://penzilla.itch.io/hooded-protagonist
-- enemy image: https://monopixelart.itch.io/forest-monsters-pixel-art
+- enemy image: https://tinymuse.itch.io/2d-pixel-woodland-monsters
 - key image: https://drxwat.itch.io/pixel-art-key
 - hearts : https://snoblin.itch.io/pixel-hearts
 
@@ -12,3 +12,15 @@ extra
 - https://edermunizz.itch.io/free-pixel-art-forest
 - https://assetstore.unity.com/packages/2d/environments/free-2d-cartoon-parallax-background-205812
 - https://craftpix.net/freebies/free-2d-top-down-pixel-dungeon-asset-pack/
+- https://aimmaga.itch.io/darksamurai
+- https://sethbb.itch.io/32rogues
+- https://kickpixel.itch.io/50fantasyicons
+
+enemies
+- https://monopixelart.itch.io/forest-monsters-pixel-art
+- https://free-game-assets.itch.io/free-slime-mobs-pixel-art-top-down-sprite-pack
+- https://pixelsnorf.itch.io/platformer-slimes
+- https://tinymuse.itch.io/2d-pixel-woodland-monsters
+- https://dondragomir.itch.io/9monsters
+- https://ivoryred.itch.io/rpg-miniatures-the-mimic
+- https://pixelius-vita.itch.io/free-asset-pack-01
