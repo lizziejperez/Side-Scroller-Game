@@ -41,7 +41,11 @@ window.addEventListener('load', function() {
             this.y = this.gameHeight - this.height; // start player at bottom of screen            
             this.image = document.getElementById('playerImage'); // set player image
             this.frameX = 0;
-            this.frameY = 0;
+            this.frameY = 0; // start with idle animation
+            this.maxFrameX = 1;
+            this.fps = 6;
+            this.frameTimer = 0;
+            this.frameInterval = 1000/this.fps;
             this.speed = 0;
             this.vy = 0; // velocity y
             this.gravity = 1; // or weight
@@ -53,7 +57,19 @@ window.addEventListener('load', function() {
 
             context.drawImage(this.image, (this.frameX * this.width), (this.frameY * this.height), this.width, this.height, this.x, this.y, this.width, this.height);
         }
-        update(input) {
+        update(input, deltaTime) {
+            // sprite animation
+            if (this.frameTimer > this.frameInterval) {
+                if (this.frameX >= this.maxFrameX) {
+                    this.frameX = 0;
+                } else {
+                    this.frameX++;
+                }
+                this.frameTimer = 0;
+            } else {
+                this.frameTimer += deltaTime;
+            }
+
             // determine speed
             if (input.keys.indexOf('ArrowRight') > -1) {
                 this.speed = 2;
@@ -77,8 +93,13 @@ window.addEventListener('load', function() {
             this.y += this.vy;            
             if (!this.onGround()) {
                 this.vy += this.gravity; // apply gravity
+                this.frameY = 5; // use jump animation frames (index 5)
+                this.maxFrameX = 7;
             } else {
                 this.vy = 0; // prevents infinite jump
+                this.frameY = 0; // use idle animation frames (index 0)
+                this.frameX = 0;
+                this.maxFrameX = 1;
             }
             if (this.y > this.gameHeight - this.height) this.y = this.gameHeight - this.height; // ground boundary
         }
@@ -133,8 +154,10 @@ window.addEventListener('load', function() {
             context.drawImage(this.image, (this.frameX * this.width), (this.frameY * this.height), this.width, this.height, this.x, this.y, this.width, this.height);
         }
         update(deltaTime) {
+            // movement
             this.x -= this.speed;
 
+            // sprite animation
             if (this.frameTimer > this.frameInterval) {
                 if (this.frameX >= this.maxFrameX) {
                     this.frameX = 0;
@@ -182,7 +205,7 @@ window.addEventListener('load', function() {
         background.draw(ctx);
         // background.update();
         player.draw(ctx);
-        player.update(input);
+        player.update(input, deltaTime);
         handleEnemies(deltaTime);
         requestAnimationFrame(animate);
     }
