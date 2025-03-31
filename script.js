@@ -53,9 +53,9 @@ window.addEventListener('load', function() {
         update(input) {
             // determine speed
             if (input.keys.indexOf('ArrowRight') > -1) {
-                this.speed = 1;
+                this.speed = 2;
             } else if (input.keys.indexOf('ArrowLeft') > -1) {
-                this.speed = -1; 
+                this.speed = -2; 
             } else {
                 this.speed = 0;
             }
