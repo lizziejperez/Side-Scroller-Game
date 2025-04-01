@@ -9,9 +9,9 @@ Idea 1: Forest Run. A red hooded protagonist must make his way through a perilou
 Idea 2: Reaper Challenge. A hooded reaper must defeat demons (skull wolfs). Maybe he must get back his book from some boss enemy.
 
     Assets
-    - background: 
     - protagonist: https://samuellee.itch.io/reaper-animated-pixel-art
     - enemies: (1) https://atari-boy.itch.io/skull-wolf-pixel-art
+    - platform: https://nkrm.itch.io/32x32-jagged-red-grass-tileset
 
 Extra Assets Found
     Backgrounds
@@ -40,8 +40,7 @@ Extra Assets Found
     - https://ivoryred.itch.io/rpg-miniatures-the-mimic
     - https://pixelius-vita.itch.io/free-asset-pack-01
     - https://admurin.itch.io/enemy-galore-1
-    - https://chiecola.itch.io/chom-bombs
-    
+    - https://chiecola.itch.io/chom-bombs    
 
     Items
     - coins? https://laredgames.itch.io/gems-coins-free
