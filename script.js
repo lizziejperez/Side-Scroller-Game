@@ -45,7 +45,7 @@ window.addEventListener('load', function() {
             this.frameX = 0;
             this.frameY = 0; // start with idle animation
             this.maxFrameX = 1;
-            this.fps = 6;
+            this.fps = 20;
             this.frameTimer = 0;
             this.frameInterval = 1000/this.fps;
             this.speed = 0;
@@ -60,8 +60,8 @@ window.addEventListener('load', function() {
             context.drawImage(this.image, (this.frameX * this.width), (this.frameY * this.height), this.width, this.height, this.x, this.y, this.width, this.height);
 
             // collision hit box
-            context.strokeStyle = 'white';
-            context.strokeRect(this.x + 6, this.y, this.width - 12, this.height);
+            // context.strokeStyle = 'white';
+            // context.strokeRect(this.x + 7, this.y + 5, this.width - 14, this.height - 5);
 
             // collision hit circle
             // context.beginPath();
@@ -71,18 +71,21 @@ window.addEventListener('load', function() {
         update(input, deltaTime) {
             // collision detection (hit boxes)
             enemies.forEach(enemy => {
-                if (this.x + 6 < enemy.x + enemy.width &&
-                    this.x + 6 + this.width - 12 > enemy.x &&
-                    this.y < enemy.y + enemy.height &&
-                    this.y + this.height > enemy.y + 15) {
+                const playerRect = [this.x + 7, this.y + 5, this.width - 14, this.height - 5];
+                const enemyRect = [enemy.x + 5, enemy.y + 20, enemy.width - 10, enemy.height - 20];
+
+                if (playerRect[0] < enemyRect[0] + enemyRect[2] &&
+                    playerRect[0] + playerRect[2] > enemyRect[0] &&
+                    playerRect[1] < enemyRect[1] + enemyRect[3] &&
+                    playerRect[1] + playerRect[3] > enemyRect[1]) {
                         gameOver = true;
                 }
             });
 
             // collision detection (hit circles)
             // enemies.forEach(enemy => {
-            //     const dx = enemy.x - this.x;
-            //     const dy = enemy.y - this.y;
+            //     const dx = (enemy.x + enemy.width/2) - (this.x + this.width/2);
+            //     const dy = (enemy.y + enemy.height/2) - (this.y + this.height/2);
             //     const distance = Math.sqrt(dx*dx+dy*dy);
             //     if (distance < enemy.width/2 + this.width/2) {
             //         gameOver = true;
@@ -128,8 +131,10 @@ window.addEventListener('load', function() {
                 this.maxFrameX = 7;
             } else {
                 this.vy = 0; // prevents infinite jump
+                if (this.frameY !== 0) {
+                    this.frameX = 0;
+                }
                 this.frameY = 0; // use idle animation frames (index 0)
-                this.frameX = 0;
                 this.maxFrameX = 1;
             }
             if (this.y > this.gameHeight - this.height) this.y = this.gameHeight - this.height; // ground boundary
@@ -149,7 +154,7 @@ window.addEventListener('load', function() {
             this.y = -110;
             this.width = 1184;
             this.height = 544;
-            this.speed = 3;
+            this.speed = 2;
         }
         draw(context) {
             context.drawImage(this.image, this.x, this.y, this.width, this.height);
@@ -186,8 +191,8 @@ window.addEventListener('load', function() {
             context.drawImage(this.image, (this.frameX * this.width), (this.frameY * this.height), this.width, this.height, this.x, this.y, this.width, this.height);
             
             // collision hit box
-            context.strokeStyle = 'white';
-            context.strokeRect(this.x, this.y + 15, this.width, this.height - 15);
+            // context.strokeStyle = 'white';
+            // context.strokeRect(this.x + 5, this.y + 20, this.width - 10, this.height - 20);
 
             // collision hit circle
             // context.beginPath();
@@ -263,7 +268,7 @@ window.addEventListener('load', function() {
         lastTime = timestamp;
         ctx.clearRect(0,0,canvas.width, canvas.height);     
         background.draw(ctx);
-        // background.update();
+        background.update();
         player.draw(ctx);
         player.update(input, deltaTime);
         handleEnemies(deltaTime);
