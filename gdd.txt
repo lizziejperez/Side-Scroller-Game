@@ -29,6 +29,9 @@ Extra Assets Found
     - https://toffeecraft.itch.io/ui-user-interface-medieval
     - https://toffeecraft.itch.io/ui-user-interface-pack-horror
     - https://toffeecraft.itch.io/ui-user-interface-pack-black-and-white
+    - https://beamedeighth.itch.io/simplekeys-animated-pixel-keyboard-keys
+    - https://greenpixels.itch.io/pixel-art-asset-3
+    - https://joshuajennerdev.itch.io/pixel-keys-x16
 
     Enemies
     - https://oco.itch.io/medieval-fantasy-character-pack
@@ -46,6 +49,9 @@ Extra Assets Found
     - coins? https://laredgames.itch.io/gems-coins-free
     - key? https://drxwat.itch.io/pixel-art-key
     - fruits? https://dantepixels.itch.io/small-fruits-asset-16x16
+
+    Music
+    - https://nomnomnami.itch.io/nomnomradio (ritual, krem)
 
     Top-down
     - tileset? https://craftpix.net/freebies/free-2d-top-down-pixel-dungeon-asset-pack/
