@@ -6,6 +6,8 @@ window.addEventListener('load', function() {
     canvas.width = 500;
     canvas.height = 360;
     let enemies = [];
+    let score = 0;
+    let gameOver = false;
 
     class InputHandler {
         constructor() {
@@ -56,8 +58,37 @@ window.addEventListener('load', function() {
             // context.fillRect(this.x, this.y, this.width, this.height);
 
             context.drawImage(this.image, (this.frameX * this.width), (this.frameY * this.height), this.width, this.height, this.x, this.y, this.width, this.height);
+
+            // collision hit box
+            context.strokeStyle = 'white';
+            context.strokeRect(this.x + 6, this.y, this.width - 12, this.height);
+
+            // collision hit circle
+            // context.beginPath();
+            // context.arc(this.x + this.width/2, this.y + this.height/2, this.width/2, 0, Math.PI*2);
+            // context.stroke();
         }
         update(input, deltaTime) {
+            // collision detection (hit boxes)
+            enemies.forEach(enemy => {
+                if (this.x + 6 < enemy.x + enemy.width &&
+                    this.x + 6 + this.width - 12 > enemy.x &&
+                    this.y < enemy.y + enemy.height &&
+                    this.y + this.height > enemy.y + 15) {
+                        gameOver = true;
+                }
+            });
+
+            // collision detection (hit circles)
+            // enemies.forEach(enemy => {
+            //     const dx = enemy.x - this.x;
+            //     const dy = enemy.y - this.y;
+            //     const distance = Math.sqrt(dx*dx+dy*dy);
+            //     if (distance < enemy.width/2 + this.width/2) {
+            //         gameOver = true;
+            //     }
+            // });
+
             // sprite animation
             if (this.frameTimer > this.frameInterval) {
                 if (this.frameX >= this.maxFrameX) {
@@ -81,7 +112,7 @@ window.addEventListener('load', function() {
 
             // determine velocity y
             if (input.keys.indexOf('ArrowUp') > -1 && this.onGround()) {
-                this.vy -= 15;
+                this.vy -= 12;
             }
 
             // horizontal movement
@@ -153,6 +184,15 @@ window.addEventListener('load', function() {
         }
         draw(context) {
             context.drawImage(this.image, (this.frameX * this.width), (this.frameY * this.height), this.width, this.height, this.x, this.y, this.width, this.height);
+            
+            // collision hit box
+            context.strokeStyle = 'white';
+            context.strokeRect(this.x, this.y + 15, this.width, this.height - 15);
+
+            // collision hit circle
+            // context.beginPath();
+            // context.arc(this.x + this.width/2, this.y + this.height/2, this.width/2, 0, Math.PI*2);
+            // context.stroke();
         }
         update(deltaTime) {
             // movement
@@ -173,6 +213,7 @@ window.addEventListener('load', function() {
             // if off screen, mark for deletion
             if (this.x < 0 - this.width) {
                 this.markedForDeletion = true;
+                score++;
             }
         }
     }
@@ -194,7 +235,19 @@ window.addEventListener('load', function() {
         enemies = enemies.filter(enemy => !enemy.markedForDeletion);
     }
 
-    function displayStatusText() {}
+    function displayStatusText(context) {
+        // display current score
+        context.fillStyle = 'white';
+        context.font = '20px Helvetica';
+        context.fillText('Score: ' + score, 15, 30);
+
+        // display game over
+        if (gameOver) {
+            context.textAlign = 'center';
+            context.fillStyle = 'white'
+            context.fillText('GAME OVER, try again!', canvas.width/2, 200);
+        }
+    }
 
     const input = new InputHandler();
     const player = new Player(canvas.width, canvas.height);
@@ -214,7 +267,10 @@ window.addEventListener('load', function() {
         player.draw(ctx);
         player.update(input, deltaTime);
         handleEnemies(deltaTime);
-        requestAnimationFrame(animate);
+        displayStatusText(ctx);
+        if (!gameOver) {
+            requestAnimationFrame(animate);
+        }        
     }
     animate(0);
 });
