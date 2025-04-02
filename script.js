@@ -15,6 +15,10 @@ window.addEventListener('load', function() {
 
             // check for when key is pressed down
             window.addEventListener('keydown', event => {
+                if (!gameOver) {
+                    bgAudio.play();
+                }                
+
                 // if key that is pressed is valid and is NOT present in keys pressed list
                 if ((event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'ArrowLeft' || event.key === 'ArrowRight') && this.keys.indexOf(event.key) === -1) {
                     // add key pressed to keys pressed list
@@ -79,6 +83,7 @@ window.addEventListener('load', function() {
                     playerRect[1] < enemyRect[1] + enemyRect[3] &&
                     playerRect[1] + playerRect[3] > enemyRect[1]) {
                         gameOver = true;
+                        bgAudio.pause();
                 }
             });
 
@@ -115,7 +120,7 @@ window.addEventListener('load', function() {
 
             // determine velocity y
             if (input.keys.indexOf('ArrowUp') > -1 && this.onGround()) {
-                this.vy -= 12;
+                this.vy -= 14;
             }
 
             // horizontal movement
@@ -260,7 +265,10 @@ window.addEventListener('load', function() {
 
     let lastTime = 0;
     let enemyTimer = 0;
-    let enemyInterval = 1000; // in miliseconds    
+    let enemyInterval = 1000; // in miliseconds  
+    
+    let bgAudio = new Audio('./assets/WahCubed.mp3');
+    bgAudio.loop = true;
     
     // main animation loop
     function animate(timestamp) {
