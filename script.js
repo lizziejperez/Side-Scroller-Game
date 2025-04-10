@@ -1,6 +1,5 @@
 // load event - waits for all assets to be fully loaded before it executes code
 window.addEventListener('load', function() {
-    // enter all game code here
     const canvas = this.document.getElementById('canvas1');
     const ctx = canvas.getContext('2d');
     canvas.width = 500;
@@ -174,6 +173,57 @@ window.addEventListener('load', function() {
         }
     }
 
+    class ParallaxBackground {
+        constructor(gameWidth, gameHeight) {
+            this.gameWidth = gameWidth;
+            this.gameHeight = gameHeight;
+            this.y = -110;
+            this.width = 1184;
+            this.height = 544;
+
+            // background layers
+            this.backgroundLayer1 = document.getElementById('backgroundLayer1Image');
+            this.backgroundLayer1_x = 0;
+            this.backgroundLayer1_speed = 0;
+
+            this.backgroundLayer2 = document.getElementById('backgroundLayer2Image');
+            this.backgroundLayer2_x = 0;
+            this.backgroundLayer2_speed = 0;
+
+            this.backgroundLayer3 = document.getElementById('backgroundLayer3Image');
+            this.backgroundLayer3_x = 0;
+            this.backgroundLayer3_speed = 1;
+            
+            this.backgroundLayer4 = document.getElementById('backgroundLayer4Image');
+            this.backgroundLayer4_x = 0;
+            this.backgroundLayer4_speed = 2;
+        }
+        draw(context) {
+            context.drawImage(this.backgroundLayer1, this.backgroundLayer1_x, this.y, this.width, this.height);
+            context.drawImage(this.backgroundLayer2, this.backgroundLayer2_x, this.y, this.width, this.height);
+            context.drawImage(this.backgroundLayer3, this.backgroundLayer3_x, this.y, this.width, this.height);
+            context.drawImage(this.backgroundLayer4, this.backgroundLayer4_x, this.y, this.width, this.height);
+            
+            // second background for seamless scrolling
+            context.drawImage(this.backgroundLayer1, this.backgroundLayer1_x + this.width - this.backgroundLayer1_speed, this.y, this.width, this.height);
+            context.drawImage(this.backgroundLayer2, this.backgroundLayer2_x + this.width - this.backgroundLayer2_speed, this.y, this.width, this.height);
+            context.drawImage(this.backgroundLayer3, this.backgroundLayer3_x + this.width - this.backgroundLayer3_speed, this.y, this.width, this.height);
+            context.drawImage(this.backgroundLayer4, this.backgroundLayer4_x + this.width - this.backgroundLayer4_speed, this.y, this.width, this.height);
+        }
+        update() {
+            this.backgroundLayer1_x -= this.backgroundLayer1_speed;
+            this.backgroundLayer2_x -= this.backgroundLayer2_speed;
+            this.backgroundLayer3_x -= this.backgroundLayer3_speed;
+            this.backgroundLayer4_x -= this.backgroundLayer4_speed;
+
+            // background scrolling
+            if (this.backgroundLayer1_x < 0 - this.width) this.backgroundLayer1_x = 0;
+            if (this.backgroundLayer2_x < 0 - this.width) this.backgroundLayer2_x = 0;
+            if (this.backgroundLayer3_x < 0 - this.width) this.backgroundLayer3_x = 0;
+            if (this.backgroundLayer4_x < 0 - this.width) this.backgroundLayer4_x = 0;
+        }
+    }
+
     class Enemy {
         constructor(gameWidth, gameHeight) {
             this.gameWidth = gameWidth;
@@ -262,6 +312,7 @@ window.addEventListener('load', function() {
     const input = new InputHandler();
     const player = new Player(canvas.width, canvas.height);
     const background = new Background(canvas.width, canvas.height);
+    // const parallaxBackground = new ParallaxBackground(canvas.width, canvas.height);
 
     let lastTime = 0;
     let enemyTimer = 0;
@@ -277,6 +328,8 @@ window.addEventListener('load', function() {
         ctx.clearRect(0,0,canvas.width, canvas.height);     
         background.draw(ctx);
         background.update();
+        // parallaxBackground.draw(ctx);
+        // parallaxBackground.update();
         player.draw(ctx);
         player.update(input, deltaTime);
         handleEnemies(deltaTime);

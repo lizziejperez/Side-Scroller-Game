@@ -9,6 +9,6 @@ body {
     transform: translate(-50%,-50%);
     border: 5px solid white;
 }
-#playerImage, #backgroundImage, #enemyImage {
+#playerImage, #backgroundImage, #enemyImage, #backgroundLayer1Image, #backgroundLayer2Image, #backgroundLayer3Image, #backgroundLayer4Image {
     display: none;
 }
