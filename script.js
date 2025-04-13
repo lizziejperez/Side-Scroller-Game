@@ -178,8 +178,8 @@ window.addEventListener('load', function() {
             this.gameWidth = gameWidth;
             this.gameHeight = gameHeight;
             this.y = -110;
-            this.width = 1184;
-            this.height = 544;
+            this.width = 592 * 2;
+            this.height = 272 * 2;
 
             // background layers
             this.backgroundLayer1 = document.getElementById('backgroundLayer1Image');
@@ -188,27 +188,28 @@ window.addEventListener('load', function() {
 
             this.backgroundLayer2 = document.getElementById('backgroundLayer2Image');
             this.backgroundLayer2_x = 0;
-            this.backgroundLayer2_speed = 0;
+            this.backgroundLayer2_speed = 0.5;
 
             this.backgroundLayer3 = document.getElementById('backgroundLayer3Image');
             this.backgroundLayer3_x = 0;
-            this.backgroundLayer3_speed = 1;
+            this.backgroundLayer3_speed = 1.5;
             
             this.backgroundLayer4 = document.getElementById('backgroundLayer4Image');
             this.backgroundLayer4_x = 0;
-            this.backgroundLayer4_speed = 2;
+            this.backgroundLayer4_speed = 2.5;
         }
         draw(context) {
             context.drawImage(this.backgroundLayer1, this.backgroundLayer1_x, this.y, this.width, this.height);
+            context.drawImage(this.backgroundLayer1, this.backgroundLayer1_x + this.width - this.backgroundLayer1_speed, this.y, this.width, this.height);  // second background for seamless scrolling
+
             context.drawImage(this.backgroundLayer2, this.backgroundLayer2_x, this.y, this.width, this.height);
-            context.drawImage(this.backgroundLayer3, this.backgroundLayer3_x, this.y, this.width, this.height);
-            context.drawImage(this.backgroundLayer4, this.backgroundLayer4_x, this.y, this.width, this.height);
+            context.drawImage(this.backgroundLayer2, this.backgroundLayer2_x + this.width - this.backgroundLayer2_speed, this.y, this.width, this.height); // second background for seamless scrolling
             
-            // second background for seamless scrolling
-            context.drawImage(this.backgroundLayer1, this.backgroundLayer1_x + this.width - this.backgroundLayer1_speed, this.y, this.width, this.height);
-            context.drawImage(this.backgroundLayer2, this.backgroundLayer2_x + this.width - this.backgroundLayer2_speed, this.y, this.width, this.height);
-            context.drawImage(this.backgroundLayer3, this.backgroundLayer3_x + this.width - this.backgroundLayer3_speed, this.y, this.width, this.height);
-            context.drawImage(this.backgroundLayer4, this.backgroundLayer4_x + this.width - this.backgroundLayer4_speed, this.y, this.width, this.height);
+            context.drawImage(this.backgroundLayer3, this.backgroundLayer3_x, this.y, this.width, this.height);
+            context.drawImage(this.backgroundLayer3, this.backgroundLayer3_x + this.width - this.backgroundLayer3_speed, this.y, this.width, this.height); // second background for seamless scrolling
+            
+            context.drawImage(this.backgroundLayer4, this.backgroundLayer4_x, this.y, this.width, this.height);
+            context.drawImage(this.backgroundLayer4, this.backgroundLayer4_x + this.width - this.backgroundLayer4_speed, this.y, this.width, this.height); // second background for seamless scrolling     
         }
         update() {
             this.backgroundLayer1_x -= this.backgroundLayer1_speed;
@@ -311,8 +312,8 @@ window.addEventListener('load', function() {
 
     const input = new InputHandler();
     const player = new Player(canvas.width, canvas.height);
-    const background = new Background(canvas.width, canvas.height);
-    // const parallaxBackground = new ParallaxBackground(canvas.width, canvas.height);
+    // const background = new Background(canvas.width, canvas.height);
+    const parallaxBackground = new ParallaxBackground(canvas.width, canvas.height);
 
     let lastTime = 0;
     let enemyTimer = 0;
@@ -326,10 +327,10 @@ window.addEventListener('load', function() {
         const deltaTime = timestamp - lastTime; // timestamp is an a paramater passed to animate function due to requestAnimationFrame function
         lastTime = timestamp;
         ctx.clearRect(0,0,canvas.width, canvas.height);     
-        background.draw(ctx);
-        background.update();
-        // parallaxBackground.draw(ctx);
-        // parallaxBackground.update();
+        // background.draw(ctx);
+        // background.update();
+        parallaxBackground.draw(ctx);
+        parallaxBackground.update();
         player.draw(ctx);
         player.update(input, deltaTime);
         handleEnemies(deltaTime);
