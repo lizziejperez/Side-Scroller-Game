@@ -6,6 +6,7 @@ window.addEventListener('load', function() {
     canvas.height = 360;
     let enemies = [];
     let score = 0;
+    let life = 3;
     let gameOver = false;
 
     class InputHandler {
@@ -77,13 +78,21 @@ window.addEventListener('load', function() {
                 const playerRect = [this.x + 7, this.y + 5, this.width - 14, this.height - 5];
                 const enemyRect = [enemy.x + 5, enemy.y + 20, enemy.width - 10, enemy.height - 20];
 
-                if (playerRect[0] < enemyRect[0] + enemyRect[2] &&
-                    playerRect[0] + playerRect[2] > enemyRect[0] &&
-                    playerRect[1] < enemyRect[1] + enemyRect[3] &&
-                    playerRect[1] + playerRect[3] > enemyRect[1]) {
-                        gameOver = true;
-                        bgAudio.pause();
+                if (!enemy.collided) {
+                    // if player hits enemy
+                    if (playerRect[0] < enemyRect[0] + enemyRect[2] &&
+                        playerRect[0] + playerRect[2] > enemyRect[0] &&
+                        playerRect[1] < enemyRect[1] + enemyRect[3] &&
+                        playerRect[1] + playerRect[3] > enemyRect[1]) {
+                            enemy.collided = true;
+                            life -= 1;
+                            if (life == 0) {
+                                gameOver = true;
+                                bgAudio.pause();
+                            }                       
+                    }
                 }
+                
             });
 
             // collision detection (hit circles)
@@ -242,6 +251,7 @@ window.addEventListener('load', function() {
             this.frameInterval = 1000/this.fps;
             this.speed = 2;
             this.markedForDeletion = false;
+            this.collided = false;
         }
         draw(context) {
             context.drawImage(this.image, (this.frameX * this.width), (this.frameY * this.height), this.width, this.height, this.x, this.y, this.width, this.height);
@@ -297,10 +307,12 @@ window.addEventListener('load', function() {
     }
 
     function displayStatusText(context) {
+        // TODO: display current life as hearts
+
         // display current score
         context.fillStyle = 'white';
         context.font = '20px Helvetica';
-        context.fillText('Score: ' + score, 15, 30);
+        context.fillText('Score: ' + score + '    Life: ' + life, 15, 30);
 
         // display game over
         if (gameOver) {
