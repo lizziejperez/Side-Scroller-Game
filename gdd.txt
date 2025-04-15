@@ -14,6 +14,13 @@ Idea 2: Reaper Challenge. A hooded reaper must defeat demons (skull wolfs). Mayb
     - enemies: (1) https://atari-boy.itch.io/skull-wolf-pixel-art
     - platform: https://nkrm.itch.io/32x32-jagged-red-grass-tileset
 
+Idea 3: Vampire Runner. Red hood vampire can turn into a bat.
+
+    Assets
+    - background: https://aethrall.itch.io/demon-woods-parallax-background
+    - player: https://penzilla.itch.io/hooded-protagonist
+    - bat: https://oco.itch.io/medieval-fantasy-character-pack
+
 Extra Assets Found
     Backgrounds
     - https://edermunizz.itch.io/free-pixel-art-forest
