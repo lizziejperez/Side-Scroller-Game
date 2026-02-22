@@ -1,73 +1,104 @@
-# Side Scroller Game
+# Oath of the Deep
 
-This is my first attempt at making a side scroller game with javascript. 
+A modular endless side-scroller built with HTML5 Canvas
 
-I'm using a tutorial (https://youtu.be/7JtLHJbm0kA?si=sozt2BlZPUJxm70Z) to help me create the initial prototype for my own game project.
+## Project Goal
 
-## Game Design Document (in-progress)
+Create a modular, scalable endless side-scroller in HTML5 Canvas that demonstrates:
+- Entity-based architecture
+- Resource management systems
+- Procedural spawning
+- State-driven gameplay
+- Dynamic lighting via Canvas masking
 
-In the ideating stages of designing the game.
+This project is designed as both a playable game and a demonstration of frontend engineering systems.
 
-### Idea 1: Forest Run. A red hooded protagonist must make his way through a perilous forest filled with angry animals.
+## Game Concept
 
-  Assets
-  - background: https://aethrall.itch.io/demon-woods-parallax-background
-  - player: https://penzilla.itch.io/hooded-protagonist
-  - enemy: https://tinymuse.itch.io/2d-pixel-woodland-monsters 
-  - hearts: https://snoblin.itch.io/pixel-hearts
-  - bgm: https://lizcheong.itch.io/chiptune-game-music (WahCubed)
+A rookie knight descends into a cursed cave after swearing to clear it of all evil perils — or never return to the kingdom.
 
-### Idea 2: Reaper Challenge. A hooded reaper must defeat demons (skull wolfs). Maybe he must get back his book from some boss enemy.
+The cave is endless.
 
-  Assets
-  - protagonist: https://samuellee.itch.io/reaper-animated-pixel-art
-  - enemies: (1) https://atari-boy.itch.io/skull-wolf-pixel-art
-  - platform: https://nkrm.itch.io/32x32-jagged-red-grass-tileset
+The deeper he goes:
 
-### Idea 3: Vampire Runner. Red hood vampire can turn into a bat.
+- Enemies grow more numerous
+- Darkness intensifies
+- His torch burns faster
 
-  Assets
-  - background: https://aethrall.itch.io/demon-woods-parallax-background
-  - player: https://penzilla.itch.io/hooded-protagonist
-  - bat: https://oco.itch.io/medieval-fantasy-character-pack
+If his flame dies, so does his oath.
 
-### Extra Assets Found
-  Backgrounds
-  - https://edermunizz.itch.io/free-pixel-art-forest
-  - https://assetstore.unity.com/packages/2d/environments/free-2d-cartoon-parallax-background-205812
-  - tileset? https://nkrm.itch.io/32x32-jagged-red-grass-tileset
-  
-  Protagonists
-  - https://toffeecraft.itch.io/cat-pixel-mega-pack
-  - https://aimmaga.itch.io/darksamurai
-  - https://legnops.itch.io/red-hood-character
-  - https://samuellee.itch.io/reaper-animated-pixel-art
+## Core Mechanic – Torch System
 
-  UIs
-  - https://toffeecraft.itch.io/ui-user-interface-medieval
-  - https://toffeecraft.itch.io/ui-user-interface-pack-horror
-  - https://toffeecraft.itch.io/ui-user-interface-pack-black-and-white
-  - https://beamedeighth.itch.io/simplekeys-animated-pixel-keyboard-keys
-  - https://greenpixels.itch.io/pixel-art-asset-3
-  - https://joshuajennerdev.itch.io/pixel-keys-x16
+The knight carries a torch that:
 
-  Enemies
-  - https://oco.itch.io/medieval-fantasy-character-pack
-  - https://monopixelart.itch.io/forest-monsters-pixel-art
-  - https://free-game-assets.itch.io/free-slime-mobs-pixel-art-top-down-sprite-pack
-  - https://pixelsnorf.itch.io/platformer-slimes
-  - https://tinymuse.itch.io/2d-pixel-woodland-monsters
-  - https://dondragomir.itch.io/9monsters
-  - https://ivoryred.itch.io/rpg-miniatures-the-mimic
-  - https://pixelius-vita.itch.io/free-asset-pack-01
-  - https://admurin.itch.io/enemy-galore-1
-  - https://chiecola.itch.io/chom-bombs    
+- Slowly burns down over time
+- Shrinks the visible light radius as it weakens
+- Can be restored by defeating enemies or collecting oil
 
-  Items
-  - coins? https://laredgames.itch.io/gems-coins-free
-  - key? https://drxwat.itch.io/pixel-art-key
-  - fruits? https://dantepixels.itch.io/small-fruits-asset-16x16
+When the torch reaches zero:
 
-  Top-down
-  - tileset? https://craftpix.net/freebies/free-2d-top-down-pixel-dungeon-asset-pack/
-  - protagonists + enemies? https://sethbb.itch.io/32rogues
+- Darkness overtakes the cave
+- A short grace period begins
+- Game over
+
+This system creates constant tension and drives difficulty scaling.
+
+## Technical Architecture
+
+Planned modular structure:
+
+- `Game` – Orchestrator & main loop
+- `Player` – Movement + state machine
+- `Enemy` classes – Individual behaviors
+- `EnemyManager` – Spawn logic
+- `TorchSystem` – Resource + light radius
+- `DepthTracker` – Endless progression scaling
+- `UI` – HUD & game state display
+- `InputHandler` – Keyboard input abstraction
+
+The project is intentionally structured to avoid monolithic tutorial-style code.
+
+## Endless Design Strategy
+
+The cave has no fixed end.
+
+Endless progression is achieved by:
+
+- Recycling cave tiles
+- Procedural enemy spawning
+- Increasing torch burn rate by depth
+- Increasing enemy spawn density over time
+
+Score is based on depth survived.
+
+## Development Stages
+
+### Stage 0 – Ideation
+
+- Explored multiple themes (vampire, reaper, chicken runner, forest runner)
+- Evaluated asset availability
+- Compared mechanic complexity
+
+### Stage 1 – Refinement
+
+- Selected knight cave theme
+- Chose Torch Light System as core mechanic
+- Defined MVP scope
+
+### Stage 2 – MVP Implementation (Upcoming)
+
+- Auto-run movement
+- Jump mechanic
+- Slash attack
+- Torch drain + oil pickups
+- Skeleton + bat enemies
+- Depth tracking
+- Restart + high score
+
+### Stage 3 – Polish (Future)
+
+- Flickering torch animation
+- Cave atmosphere layers
+- Additional enemy types
+- Difficulty phase progression
+- Sound design
