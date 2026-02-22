@@ -102,3 +102,15 @@ Score is based on depth survived.
 - Additional enemy types
 - Difficulty phase progression
 - Sound design
+
+## Learning Notes
+
+This project started as a learning exercise using tutorials to understand HTML5 Canvas game loops and sprite animation.
+
+It has since been refactored and expanded into an original game concept (“Oath of the Deep”) with a modular architecture and new core mechanics (torch/light system).
+
+## Prototype (Learning Version)
+
+The original tutorial-based prototype is preserved in `/prototype` for reference.
+
+The main game (“Oath of the Deep”) is being built in `/src`.
