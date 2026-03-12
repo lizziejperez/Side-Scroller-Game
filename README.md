@@ -9,10 +9,10 @@ A modular endless side-scroller built with HTML5 Canvas
 Implemented so far:
 - Modular project structure
 - Scene system architecture
-
-Next steps:
 - Title/menu scene
 - Scene switching foundation
+
+Next steps:
 - Play scene implementation
 - Player movement and controls
 - Tutorial scene

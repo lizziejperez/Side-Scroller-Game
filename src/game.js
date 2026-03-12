@@ -29,10 +29,7 @@ export class Game {
   /**
    * Change the active scene.
    *
-   * This will be used later when switching from:
-   * - menu -> play
-   * - play -> tutorial
-   * - play -> game over
+   * Used for switching scenes.
    */
   changeScene(scene) {
     this.currentScene = scene;

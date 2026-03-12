@@ -11,6 +11,7 @@
 
 import { Button } from "../ui/button.js";
 import { COLORS } from "../config/colors.js";
+import { PlayScene } from "./playScene.js";
 
 export class MenuScene {
   constructor(game) {
@@ -18,8 +19,7 @@ export class MenuScene {
     this.game = game;
 
     // Create the Play button
-    // Currently clicking it just logs to the console.
-    // TODO: Switch to PlayScene once the PlayScene is implemented.
+    // Clicking it switches from mentu scene to play scene.
     this.playButton = new Button({
       x: this.game.width / 2 - 110,
       y: 340,
@@ -27,7 +27,8 @@ export class MenuScene {
       height: 60,
       text: "Play",
       onClick: () => {
-        console.log("Play clicked");
+        // console.log("Play clicked");
+        this.game.changeScene(new PlayScene(this.game));
       },
     });
 
