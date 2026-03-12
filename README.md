@@ -17,6 +17,34 @@ Next steps:
 - Player movement and controls
 - Tutorial scene
 
+## Running the Project
+
+This project uses JavaScript ES modules (`import` / `export`), which means it must be run through a **local development server**.
+
+Opening `index.html` directly in the browser (`file://`) will not work because modern browsers block module imports for security reasons.
+
+### Quick Start (VS Code)
+
+1. Install the **Live Server** extension
+2. Open the project folder in VS Code
+3. Right-click `index.html`
+4. Select **"Open with Live Server"**
+
+### Alternative Local Servers
+
+You can also run the project using a simple local server:
+
+Python:
+```
+python -m http.server
+```
+
+Node:
+```
+npx serve
+```
+Then open: [http://localhost:8000](http://localhost:8000)
+
 ## Project Goal
 
 Create a modular, scalable endless side-scroller in HTML5 Canvas that demonstrates:
