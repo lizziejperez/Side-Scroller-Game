@@ -2,6 +2,21 @@
 
 A modular endless side-scroller built with HTML5 Canvas
 
+## Current Status
+
+🚧 Early development
+
+Implemented so far:
+- Modular project structure
+- Scene system architecture
+
+Next steps:
+- Title/menu scene
+- Scene switching foundation
+- Play scene implementation
+- Player movement and controls
+- Tutorial scene
+
 ## Project Goal
 
 Create a modular, scalable endless side-scroller in HTML5 Canvas that demonstrates:
@@ -85,7 +100,20 @@ Score is based on depth survived.
 - Chose Torch Light System as core mechanic
 - Defined MVP scope
 
-### Stage 2 – MVP Implementation (Upcoming)
+### Stage 2 - Initial Implementation (Ongoing)
+
+Establish the foundational architecture and game flow.
+
+- Initialize modular project structure
+- Implement scene system
+- Create menu scene
+- Create play scene
+- Add movement and input controls
+- Create tutorial scene
+
+### Stage 3 – MVP Implementation (Upcoming)
+
+Implement the core gameplay loop and mechanics.
 
 - Auto-run movement
 - Jump mechanic
@@ -95,7 +123,7 @@ Score is based on depth survived.
 - Depth tracking
 - Restart + high score
 
-### Stage 3 – Polish (Future)
+### Stage 4 – Polish (Future)
 
 - Flickering torch animation
 - Cave atmosphere layers
