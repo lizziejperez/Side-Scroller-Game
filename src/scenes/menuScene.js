@@ -4,6 +4,7 @@
 // - Draw the title screen
 // - Show the game's opening story text
 // - Show the Play button
+// - Render atmospheric ember particles
 // - Handle clicking the Play button
 //
 // This is the first scene shown when the game loads.
@@ -29,15 +30,53 @@ export class MenuScene {
         console.log("Play clicked");
       },
     });
+
+    // Ember particle system
+    // Small floating particles simulate ash drifting upward in the cave environment.
+    this.embers = [];
+    this.maxEmbers = 30;
+
+    for (let i = 0; i < this.maxEmbers; i++) {
+      this.embers.push(this.createEmber());
+    }
+  }
+
+  /**
+   * Create a single ember particle.
+   */
+  createEmber() {
+    return {
+      x: Math.random() * this.game.width,
+      y: this.game.height + Math.random() * 100,
+      radius: Math.random() * 2 + 1,
+      speedY: Math.random() * 0.6 + 0.3,
+      driftX: (Math.random() - 0.5) * 0.4,
+      alpha: Math.random() * 0.5 + 0.2,
+    };
   }
 
   /**
    * Update the menu scene.
    *
-   * The menu currently has no animated elements yet,
-   * but the method exists so the scene structure stays consistent.
+   * Updates ember particle positions to create a gentle floating effect.
    */
-  update() {}
+  update() {
+    for (const ember of this.embers) {
+      ember.y -= ember.speedY;
+      ember.x += ember.driftX;
+
+      // Reset ember if it leaves the top of the screen
+      if (ember.y < -10) {
+        Object.assign(ember, this.createEmber(), {
+          y: this.game.height + Math.random() * 40,
+        });
+      }
+
+      // Wrap horizontally so embers don't disappear abruptly
+      if (ember.x < -10) ember.x = this.game.width + 10;
+      if (ember.x > this.game.width + 10) ember.x = -10;
+    }
+  }
 
   /**
    * Draw the menu scene.
@@ -46,6 +85,9 @@ export class MenuScene {
     // Fill the whole screen with the main background color
     ctx.fillStyle = COLORS.background;
     ctx.fillRect(0, 0, this.game.width, this.game.height);
+
+    // Draw ember particles behind UI elements
+    this.drawEmbers(ctx);
 
     // Draw the center panel behind the title and story text
     ctx.fillStyle = COLORS.panel;
@@ -86,6 +128,24 @@ export class MenuScene {
 
     // Draw the Play button
     this.playButton.draw(ctx);
+  }
+
+  /**
+   * Draw ember particles.
+   */
+  drawEmbers(ctx) {
+    for (const ember of this.embers) {
+      ctx.save();
+
+      ctx.globalAlpha = ember.alpha;
+
+      ctx.beginPath();
+      ctx.fillStyle = COLORS.accentFire;
+      ctx.arc(ember.x, ember.y, ember.radius, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
   }
 
   /**
