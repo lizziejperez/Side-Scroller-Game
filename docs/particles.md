@@ -64,20 +64,6 @@ Each frame the particle moves upward:
 ```js
 y = y - speedY
 ```
-
-Where:
-```js
-speedY = random(0.3 → 0.9)
-```
-
-This creates different rising speeds.
-
-## Vertical Movement
-
-Each frame the particle moves upward:
-```js
-y = y - speedY
-```
 Where:
 ```js
 speedY = random(0.3 → 0.9)
