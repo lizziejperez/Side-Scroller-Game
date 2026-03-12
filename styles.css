@@ -1,1 +1,65 @@
-/* TODO: create styles */
+/* Color Palette */
+:root {
+    /* Environment */
+    --color-background: #090b1a;
+    --color-panel: #171a33;
+    --color-panel-soft: #23264a;
+    --color-border: #3f4670;
+
+    /* Text */
+    --color-text-primary: #e7e9f2;
+    --color-text-muted: #9aa0bf;
+
+    /* Main accents */
+    --color-accent-torch: #f2b84b;
+    --color-accent-fire: #de6b3d;
+    --color-accent-danger: #c94b4b;
+
+    /* Character-inspired accents */
+    --color-accent-knight: #b44646;
+    --color-accent-steel: #8d96b8;
+    --color-accent-goblin: #cfd96f;
+
+    /* Buttons */
+    --color-button: #2b315c;
+    --color-button-text: #f4f1e8;
+
+    /* Special effects */
+    --torch-glow: rgba(242, 184, 75, 0.35);
+    --shadow-overlay: rgba(5, 6, 16, 0.82);
+}
+
+
+body {
+    /* Remove default browser margins */
+    margin: 0;
+    padding: 0;
+
+    /* Full viewport height */
+    height: 100vh;
+
+    /* Center the game */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    /* Background outside the game */
+    background-color: #111;
+
+    /* Optional: nicer font rendering */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Game canvas */
+canvas {
+    display: block;
+
+    /* Optional frame around game */
+    border: 3px solid #333;
+
+    /* Background inside game */
+    background: #000;
+
+    /* Prevent blurry scaling */
+    image-rendering: pixelated;
+}
